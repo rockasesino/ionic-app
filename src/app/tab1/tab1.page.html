@@ -1,25 +1,37 @@
+<!-- Encabezado superior con título -->
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Galeria de fotos
+  <ion-toolbar color="primary">
+    <ion-title class="ion-text-center">
+      📸 Galería de Fotos
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
- <ion-grid>
-  <ion-row>
-    <ion-col size="6" *ngFor="let foto of fotoService.fotos; index as position">
-    <ion-img [src]="foto.webviewPath"></ion-img> 
-    </ion-col>
-  </ion-row>  
- </ion-grid>
+<!-- Contenido principal de la página -->
+<ion-content [fullscreen]="true" class="ion-padding gallery-content">
 
+  <!-- Grid (rejilla) para organizar las fotos en filas y columnas -->
+  <ion-grid>
+    <ion-row>
+      <!-- Itera sobre el arreglo de fotos desde fotoService -->
+      <ion-col 
+        size="6" 
+        *ngFor="let foto of fotoService.fotos; index as position"
+        class="photo-col"
+      >
+        <!-- Cada foto se muestra dentro de una tarjeta -->
+        <ion-card class="photo-card">
+          <ion-img [src]="foto.webviewPath" class="photo-img"></ion-img>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
+  <!-- Botón flotante de acción rápida (FAB) para abrir la cámara -->
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab-button color="tertiary" (click)="addPhotoToGallery()">
+      <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
-<ion-fab vertical="bottom" horizontal="center" slot="fixed">
-  <ion-fab-button (click)="addPhotoToGallery()">
-    <ion-icon name="camera"></ion-icon>
-  </ion-fab-button>
-</ion-fab> 
 </ion-content>
